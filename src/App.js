@@ -53,11 +53,9 @@ class 一营 extends Component {
 
   render() {
     const boss = this.props.laoda
-
     return (
       <div>
         <h2>一营营长，{boss}</h2>
-
         <Button size="small" type="primary" onClick={() => this.addSolder()}>
           招兵
         </Button>
