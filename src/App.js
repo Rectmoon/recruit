@@ -1,15 +1,28 @@
 import React, { Component } from 'react'
 import 'antd-mobile/dist/antd-mobile.css'
 import { Button, List } from 'antd-mobile'
+import { addCount, decCount, addCountAsync } from './index.redux'
+import { connect } from 'react-redux'
 
+@connect(
+  state => ({ num: state }),
+  { addCount, decCount, addCountAsync }
+)
 class App extends Component {
   render() {
     const boss = '李云龙'
+    const { num, addCount, decCount, addCountAsync } = this.props
     return (
       <div>
         <h2>独立团， 团长{boss}</h2>
         <一营 laoda="张大彪" />
         <骑兵连 laoda="孙德胜" />
+        <p>
+          现有机枪<strong>{num}</strong>把
+        </p>
+        <Button onClick={addCount}>申请武器</Button>
+        <Button onClick={decCount}>上交武器</Button>
+        <Button onClick={addCountAsync}>异步处理</Button>
       </div>
     )
   }
@@ -32,18 +45,29 @@ class 一营 extends Component {
     })
   }
 
+  handleDelete(i) {
+    const { solders } = this.state
+    solders.splice(i, 1)
+    this.setState({ solders })
+  }
+
   render() {
     const boss = this.props.laoda
+
     return (
       <div>
         <h2>一营营长，{boss}</h2>
-        <Button type="primary" onClick={() => this.addSolder()}>
+
+        <Button size="small" type="primary" onClick={() => this.addSolder()}>
           招兵
         </Button>
         <h3>士兵</h3>
         <List>
           {this.state.solders.map((item, i) => (
-            <List.Item key={i}>{item}</List.Item>
+            <List.Item key={i}>
+              {item}
+              <Button onClick={() => this.handleDelete(i)}>x</Button>
+            </List.Item>
           ))}
         </List>
       </div>
