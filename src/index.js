@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { Flex } from 'antd-mobile'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
-
+import 'antd-mobile/dist/antd-mobile.css'
 import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import 'antd-mobile/dist/antd-mobile.css'
 import { Button, List } from 'antd-mobile'
 import { addCount, decCount, addCountAsync } from './index.redux'
 import { connect } from 'react-redux'
