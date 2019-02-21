@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import { Button, List } from 'antd-mobile'
-import { addCount, decCount, addCountAsync } from './index.redux'
+import { addCount, decCount, addCountAsync } from './store/actions'
 import { connect } from 'react-redux'
 
 @connect(
-  state => ({ num: state }),
+  state => ({ num: state.counter }),
   { addCount, decCount, addCountAsync }
 )
 class App extends Component {
   render() {
     const boss = '李云龙'
     const { num, addCount, decCount, addCountAsync } = this.props
+
     return (
       <div>
         <h2>独立团， 团长{boss}</h2>

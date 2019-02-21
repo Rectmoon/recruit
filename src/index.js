@@ -1,29 +1,17 @@
 import React from 'react'
-import thunk from 'redux-thunk'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { Flex } from 'antd-mobile'
-import { createStore, applyMiddleware, compose } from 'redux'
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import 'antd-mobile/dist/antd-mobile.css'
 import './index.css'
 import App from './App'
+import store from './store'
+
+import Auth from '@/components/auth/auth'
+import Login from './containers/login/login'
+import Register from './containers/register/register'
+
 import * as serviceWorker from './serviceWorker'
-import { counter } from './index.redux'
-
-const store = createStore(
-  counter,
-  compose(
-    applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__
-      ? window.__REDUX_DEVTOOLS_EXTENSION__()
-      : () => {}
-  )
-)
-
-store.subscribe(() => {
-  console.log(store.getState())
-})
 
 function Two() {
   return <h2>二营</h2>
@@ -44,21 +32,21 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <div>
-        <Flex>
-          <Flex.Item>
-            <Link to="/">一营</Link>
-          </Flex.Item>
-          <Flex.Item>
-            <Link to="/two">二营</Link>
-          </Flex.Item>
-          <Flex.Item>
-            <Link to="/three">骑兵连</Link>
-          </Flex.Item>
-        </Flex>
+        <nav>
+          <Link to="/">一营</Link>
+          <Link to="/two">二营</Link>
+          <Link to="/three">骑兵连</Link>
+          <Link to="/login">登录</Link>
+          <Link to="/register">注册</Link>
+        </nav>
+
+        <Auth />
         <Switch>
           <Route path="/" exact component={App} />
           <Route path="/two" component={Two} />
           <Route path="/three" component={Three} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
           <Route path="/:topic" component={Topic} />
         </Switch>
       </div>
