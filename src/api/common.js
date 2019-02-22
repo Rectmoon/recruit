@@ -15,6 +15,7 @@ export function fetch(url, params = {}) {
 }
 
 export function post(url, data = {}) {
+  console.log(data)
   return new Promise((resolve, reject) => {
     Instance.post(url, data).then(
       res => {

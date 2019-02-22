@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Logo from '../../components/logo/logo'
+import lyForm from '@/components/lyform'
+import { register } from '@/store/user'
 import {
   List,
   InputItem,
@@ -11,12 +14,23 @@ import {
 
 const RadioItem = Radio.RadioItem
 
-export default class Login extends Component {
+@connect(
+  state => state.user,
+  { register }
+)
+@lyForm
+class Register extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      type: 'genuis'
-    }
+    this.handleRegister = this.handleRegister.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.handleChange('type', 'genius')
+  }
+
+  handleRegister() {
+    this.props.register(this.props.state)
   }
 
   render() {
@@ -25,27 +39,56 @@ export default class Login extends Component {
         <Logo />
         <h2>我是注册</h2>
         <WingBlank>
+          {this.props.msg ? (
+            <p className="error-msg">{this.props.msg}</p>
+          ) : null}
           <List>
-            <InputItem>用户</InputItem>
+            <InputItem
+              onChange={v => {
+                this.props.handleChange('username', v)
+              }}
+            >
+              用户
+            </InputItem>
             <WhiteSpace />
-            <InputItem>密码</InputItem>
+            <InputItem
+              onChange={v => {
+                this.props.handleChange('password', v)
+              }}
+            >
+              密码
+            </InputItem>
             <WhiteSpace />
-            <InputItem>确认密码</InputItem>
+            <InputItem
+              onChange={v => {
+                this.props.handleChange('repeatPassword', v)
+              }}
+            >
+              确认密码
+            </InputItem>
             <WhiteSpace />
-            <RadioItem checked={this.state.type === 'genuis'}>牛人</RadioItem>
-            <RadioItem checked={this.state.type === 'boss'}>BOSS</RadioItem>
+            <RadioItem
+              checked={this.props.state.type === 'genius'}
+              onChange={() => this.props.handleChange('type', 'genius')}
+            >
+              牛人
+            </RadioItem>
+            <RadioItem
+              checked={this.props.state.type === 'boss'}
+              onChange={() => this.props.handleChange('type', 'boss')}
+            >
+              BOSS
+            </RadioItem>
           </List>
 
           <WhiteSpace />
-          <Button type="primary" onClick={this.register}>
+          <Button type="primary" onClick={this.handleRegister}>
             注册
           </Button>
         </WingBlank>
       </div>
     )
   }
-
-  register() {
-    console.log(111)
-  }
 }
+
+export default Register

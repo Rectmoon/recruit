@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { user } from './user'
 
 function counteReducer(state = 0, action) {
   switch (action.type) {
@@ -11,4 +12,4 @@ function counteReducer(state = 0, action) {
   }
 }
 
-export default combineReducers({ counter: counteReducer })
+export default combineReducers({ counter: counteReducer, user })

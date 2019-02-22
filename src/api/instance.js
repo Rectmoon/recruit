@@ -7,7 +7,8 @@ const Instance = axios.create({
   responseType: 'json',
   withCredentials: true,
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/json'
+    // 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
   }
 })
 

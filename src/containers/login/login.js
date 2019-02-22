@@ -3,6 +3,10 @@ import Logo from '../../components/logo/logo'
 import { List, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile'
 
 export default class Login extends Component {
+  register() {
+    this.props.history.push('/register')
+  }
+
   render() {
     return (
       <div>
