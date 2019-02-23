@@ -33,7 +33,7 @@ export function register({ username, password, repeatPassword, type }) {
   return dispatch => {
     registerIn({ username, password, type }).then(res => {
       if (res.code == 0 && res.data) return dispatch(authSuccess(res.data))
-      dispatch(errorMsg(res.data.msg))
+      dispatch(errorMsg(res.msg))
     })
   }
 }

@@ -19,10 +19,11 @@ router.get('/list', (req, res) => {
 
 router.get('/info', (req, res) => {
   const { userid } = req.cookies
+  console.log(userid)
   if (!userid) return res.json({ code: 1 })
   User.findOne({ _id: userid }, _filter, (err, doc) => {
     if (err) return res.json({ code: 1, msg: '后端出错了' })
-    doc && res.json({ code: 0, data: doc })
+    res.json({ code: 0, data: doc })
   })
 })
 

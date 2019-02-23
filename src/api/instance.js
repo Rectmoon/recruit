@@ -17,17 +17,28 @@ Instance.interceptors.request.use(
     Toast.loading('加载中', 0)
     return config
   },
-  error => Promise.reject(error)
+  error => {
+    Toast.fail('请求超时，请联系管理员')
+    return Promise.reject(error)
+  }
 )
 
 Instance.interceptors.response.use(
   res => {
-    setTimeout(() => {
-      Toast.hide()
-    }, 300)
+    switch (res.data.code) {
+      case 1:
+        Toast.fail(res.data.msg)
+        break
+      case 0:
+      default:
+        Toast.hide()
+    }
     return res.data
   },
-  error => Promise.reject(error)
+  error => {
+    Toast.fail('请求超时，请联系管理员')
+    return Promise.reject(error)
+  }
 )
 
 export default Instance
