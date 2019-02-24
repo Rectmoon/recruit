@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "prop-types": "^15.7.2",
     "react": "^16.8.2",
     "react-dev-utils": "^7.0.3",
     "react-dom": "^16.8.2",
@@ -13,6 +14,7 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
+    "db": "mongod --dbpath db --logpath logs/log.txt --port 27016",
     "serve": "nodemon server/app.js",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",

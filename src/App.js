@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button, List } from 'antd-mobile'
-import { addCount, decCount, addCountAsync } from './store/actions'
+import { addCount, decCount, addCountAsync } from './store/reducer'
 import { connect } from 'react-redux'
 
 @connect(

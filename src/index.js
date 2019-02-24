@@ -12,6 +12,7 @@ import Login from './containers/login/login'
 import Register from './containers/register/register'
 import BossInfo from './containers/bossinfo/bossinfo'
 import GeniusInfo from './containers/geniusinfo/geniusinfo'
+import DashBoard from '@/components/dash-board/dash-board'
 
 import * as serviceWorker from './serviceWorker'
 
@@ -51,7 +52,7 @@ ReactDOM.render(
           <Route path="/register" component={Register} />
           <Route path="/bossinfo" component={BossInfo} />
           <Route path="/geniusinfo" component={GeniusInfo} />
-          <Route path="/:topic" component={Topic} />
+          <Route component={DashBoard} />
         </Switch>
       </div>
     </Router>

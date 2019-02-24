@@ -17,12 +17,6 @@ function getMd5Password(p) {
   return utility.md5(utility.md5(p + salt))
 }
 
-router.get('/list', (req, res) => {
-  User.find({}, (err, doc) => {
-    res.json(doc)
-  })
-})
-
 router.get('/info', (req, res) => {
   const { userid } = req.cookies
   if (!userid) return res.json({ code: 1 })
@@ -30,10 +24,6 @@ router.get('/info', (req, res) => {
     if (err) return res.json({ code: 1, msg: '后端出错了' })
     res.json({ code: 0, data: doc })
   })
-})
-
-router.get('/login', function(req, res) {
-  res.send('login')
 })
 
 router.post('/register', (req, res) => {
@@ -77,8 +67,12 @@ router.post('/update', (req, res) => {
   })
 })
 
-router.get('/list', function(req, res) {
-  res.send('list')
+router.get('/list', (req, res) => {
+  const { type } = req.query
+  User.find({ type }, (err, doc) => {
+    if (err) return res.json({ code: 1, msg: '后端出错了' })
+    res.json({ code: 0, data: doc })
+  })
 })
 
 module.exports = router

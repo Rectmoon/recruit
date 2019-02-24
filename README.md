@@ -2,8 +2,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ```
 
-mongod --dbpath "D:\Study\FullStack\我的项目\React\recruit\db" --logpath "D:\Study\FullStack\我的项目\React\recruit\log.txt" --port 27016
-
 1. yarn serve
 2. yarn start
 

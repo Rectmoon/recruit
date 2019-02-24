@@ -17,3 +17,15 @@ code {
   color: #f50;
   padding-left: 10px;
 }
+
+.am-tab-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.fixd-header.am-navbar {
+  top: 0;
+}
+.page-content {
+  padding: 45px 5px;
+}
