@@ -32,6 +32,7 @@ module.exports = {
       addDecoratorsLegacy()
     )
   ),
+
   devServer: overrideDevServer(config => {
     config.proxy = {
       '/user': {

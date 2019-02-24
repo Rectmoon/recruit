@@ -27,7 +27,7 @@ Instance.interceptors.response.use(
   res => {
     switch (res.data.code) {
       case 1:
-        Toast.fail(res.data.msg)
+        ;(res.data.msg && Toast.fail(res.data.msg)) || Toast.hide()
         break
       case 0:
       default:

@@ -10,6 +10,8 @@ import store from './store'
 import Auth from '@/components/auth/auth'
 import Login from './containers/login/login'
 import Register from './containers/register/register'
+import BossInfo from './containers/bossinfo/bossinfo'
+import GeniusInfo from './containers/geniusinfo/geniusinfo'
 
 import * as serviceWorker from './serviceWorker'
 
@@ -32,13 +34,13 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <div>
-        <nav>
+        {/* <nav>
           <Link to="/">一营</Link>
           <Link to="/two">二营</Link>
           <Link to="/three">骑兵连</Link>
           <Link to="/login">登录</Link>
           <Link to="/register">注册</Link>
-        </nav>
+        </nav> */}
 
         <Auth />
         <Switch>
@@ -47,6 +49,8 @@ ReactDOM.render(
           <Route path="/three" component={Three} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/bossinfo" component={BossInfo} />
+          <Route path="/geniusinfo" component={GeniusInfo} />
           <Route path="/:topic" component={Topic} />
         </Switch>
       </div>

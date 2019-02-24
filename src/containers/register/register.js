@@ -11,6 +11,7 @@ import {
   Button,
   Radio
 } from 'antd-mobile'
+import { Redirect } from 'react-router-dom'
 
 const RadioItem = Radio.RadioItem
 
@@ -36,6 +37,7 @@ class Register extends Component {
   render() {
     return (
       <div>
+        {this.props.redirectTo ? <Redirect to={this.props.redirectTo} /> : null}
         <Logo />
         <h2>我是注册</h2>
         <WingBlank>

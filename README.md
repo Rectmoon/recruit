@@ -1,5 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+```
+
+mongod --dbpath "D:\Study\FullStack\我的项目\React\recruit\db" --logpath "D:\Study\FullStack\我的项目\React\recruit\log.txt" --port 27016
+
+1. yarn serve
+2. yarn start
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -66,3 +73,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```

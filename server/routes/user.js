@@ -1,4 +1,5 @@
 const express = require('express')
+const utility = require('utility')
 const router = express.Router()
 const model = require('../model')
 
@@ -11,6 +12,11 @@ const ChatModel = new Chat({
   username: 'lisi'
 })
 
+function getMd5Password(p) {
+  const salt = 'yinglzx!@#IUHJh~~'
+  return utility.md5(utility.md5(p + salt))
+}
+
 router.get('/list', (req, res) => {
   User.find({}, (err, doc) => {
     res.json(doc)
@@ -19,7 +25,6 @@ router.get('/list', (req, res) => {
 
 router.get('/info', (req, res) => {
   const { userid } = req.cookies
-  console.log(userid)
   if (!userid) return res.json({ code: 1 })
   User.findOne({ _id: userid }, _filter, (err, doc) => {
     if (err) return res.json({ code: 1, msg: '后端出错了' })
@@ -38,7 +43,7 @@ router.post('/register', (req, res) => {
     if (doc) return res.json({ code: 1, msg: '用户名重复' })
     const userModel = new User({
       username,
-      password,
+      password: getMd5Password(password),
       type
     })
     userModel.save((e, d) => {
@@ -47,6 +52,28 @@ router.post('/register', (req, res) => {
       res.cookie('userid', _id)
       return res.json({ code: 0, data: { username, type, _id } })
     })
+  })
+})
+
+router.post('/login', (req, res) => {
+  const { username, password } = req.body
+  User.findOne({ username, password: getMd5Password(password) }, (err, doc) => {
+    if (err) return res.json({ code: 1, msg: '后端出错了' })
+    if (!doc) return res.json({ code: 1, msg: '用户名或者密码错误' })
+    res.cookie('userid', doc._id)
+    res.json({ code: 0, data: doc })
+  })
+})
+
+router.post('/update', (req, res) => {
+  const { userid } = req.cookies
+  const body = req.body
+  if (!userid) return res.json({ code: 1 })
+  User.findByIdAndUpdate(userid, body, (err, doc) => {
+    if (err) return res.json({ code: 1, msg: '后端出错了' })
+    const { username, type } = doc
+    const d = Object.assign({ username, type }, body)
+    res.json({ code: 0, data: d })
   })
 })
 
