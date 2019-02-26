@@ -1,20 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
-import { TabBar, NavBar } from 'antd-mobile'
+import { NavBar } from 'antd-mobile'
 import NavLink from '../navlink/navlink'
 import Boss from '@/components/boss/boss'
-
-function Genius() {
-  return <h2>牛人首页</h2>
-}
+import Genius from '@/components/genius/genius'
+import Me from '@/components/me/me'
 
 function Msg() {
   return <h2>消息</h2>
-}
-
-function Me() {
-  return <h2>个人中心</h2>
 }
 
 @connect(state => state.user)

@@ -1200,10 +1200,10 @@ ansi-styles@^3.2.0, ansi-styles@^3.2.1:
   dependencies:
     color-convert "^1.9.0"
 
-antd-mobile@^2.2.8:
-  version "2.2.8"
-  resolved "http://registry.npm.taobao.org/antd-mobile/download/antd-mobile-2.2.8.tgz#d69d21a7778b9de4e0f406dd68b4df47de2c19e6"
-  integrity sha1-1p0hp3eLneTg9AbdaLTfR94sGeY=
+antd-mobile@^2.2.9:
+  version "2.2.9"
+  resolved "http://registry.npm.taobao.org/antd-mobile/download/antd-mobile-2.2.9.tgz#7a2a3e8365b9323a38dcc65a6d4fb7a72492b6c9"
+  integrity sha1-eio+g2W5Mjo43MZabU+3pySStsk=
   dependencies:
     array-tree-filter "~2.1.0"
     babel-runtime "6.x"

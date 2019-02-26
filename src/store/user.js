@@ -9,7 +9,10 @@ const LOAD_DATA = 'LOAD_DATA'
 const initState = {
   redirectTo: '',
   isAuth: false,
-  user: {},
+  user: {
+    avatar: 'boy',
+    desc: ''
+  },
   msg: ''
 }
 
@@ -44,6 +47,8 @@ export function user(state = initState, action) {
       return { ...state, msg: action.msg, isAuth: false }
     case LOAD_DATA:
       return { ...state, isAuth: true, user: { ...action.payload } }
+    case LOGOUT:
+      return { ...initState, redirectTo: '/login' }
     default:
       return state
   }
@@ -68,4 +73,8 @@ export function login({ username, password }) {
       dispatch(errorMsg(res.msg))
     })
   }
+}
+
+export function logout() {
+  return { type: LOGOUT }
 }
