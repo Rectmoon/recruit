@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { List, InputItem } from 'antd-mobile'
+import { List, InputItem, NavBar } from 'antd-mobile'
 import { getMsgList, sendMsg, recvMsg } from '@/store/chat'
+import { getChatId } from '@/utils/chat'
 
 @connect(
   state => state,
@@ -31,10 +32,28 @@ class Chat extends Component {
   }
 
   render() {
+    const Item = List.Item
+    const userid = this.props.match.params.userid
+    const users = this.props.chat.users
+    const chatid = getChatId(userid, this.props.user.user._id)
+    const chatmsgs = this.props.chat.chatmsg.filter(v => v.chatid == chatid)
+
     return (
-      <div>
-        {this.props.chat.chatmsg.map((item, i) => {
-          return <p key={i}>{item.content}</p>
+      <div id="chat-page">
+        <NavBar mode="dark">{userid}</NavBar>
+        {chatmsgs.map(v => {
+          const avatar = require(`@/assets/${users[v.from].avatar}.png`)
+          return v.from == userid ? (
+            <List key={v._id}>
+              <Item thumb={avatar}>{v.content}</Item>
+            </List>
+          ) : (
+            <List key={v._id}>
+              <Item extra={<img src={avatar} />} className="chat-me">
+                {v.content}
+              </Item>
+            </List>
+          )
         })}
         <div className="stick-footer">
           <List>

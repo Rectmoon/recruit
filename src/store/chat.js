@@ -9,16 +9,24 @@ const MSG_READ = 'MSG_READ'
 
 const initState = {
   unread: 0,
+  users: {},
   chatmsg: []
 }
 
-const msgList = msg => ({ type: MSG_LIST, payload: msg })
+const msgList = (msgs, users, userid) => ({
+  type: MSG_LIST,
+  payload: { msgs, users, userid }
+})
 const msgRecv = msg => ({ type: MSG_RECV, payload: msg })
 
 export default function chat(state = initState, action) {
   switch (action.type) {
     case MSG_LIST:
-      return { ...state, chatmsg: action.payload }
+      return {
+        ...state,
+        users: action.payload.users,
+        chatmsg: action.payload.msgs
+      }
     case MSG_RECV:
       return { ...state, chatmsg: [...state.chatmsg, action.payload] }
     case MSG_READ:
@@ -28,10 +36,10 @@ export default function chat(state = initState, action) {
 }
 
 export function getMsgList() {
-  return dispatch => {
+  return (dispatch, getState) => {
     getmsglistApi().then(res => {
-      if (res.code == 0 && res.data) {
-        dispatch(msgList(res.data.msgs))
+      if (res.code == 0) {
+        dispatch(msgList(res.data.msgs, res.data.users, getState().user._id))
       }
     })
   }
@@ -46,7 +54,6 @@ export function sendMsg({ from, to, msg }) {
 export function recvMsg() {
   return dispatch => {
     socket.on('recivemsg', data => {
-      console.log(data)
       dispatch(msgRecv(data))
     })
   }
