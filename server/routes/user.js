@@ -8,10 +8,6 @@ const _filter = { password: 0, __v: 0 }
 const User = model.getModel('user')
 const Chat = model.getModel('chat')
 
-const ChatModel = new Chat({
-  username: 'lisi'
-})
-
 function getMd5Password(p) {
   const salt = 'yinglzx!@#IUHJh~~'
   return utility.md5(utility.md5(p + salt))
@@ -72,6 +68,25 @@ router.get('/list', (req, res) => {
   User.find({ type }, (err, doc) => {
     if (err) return res.json({ code: 1, msg: '后端出错了' })
     res.json({ code: 0, data: doc })
+  })
+})
+
+router.get('/getmsglist', (req, res) => {
+  const { userid } = req.cookies
+  User.find({}, (e, userdoc) => {
+    if (e) return res.json({ code: 1, msg: '后端出错了' })
+    let users = userdoc.reduce((res, next) => {
+      const { username, avatar } = next
+      res[next._id] = { username, avatar }
+      return res
+    }, {})
+    Chat.find({ $or: [{ from: userid }, { to: userid }] }, (err, msgs) => {
+      if (err) return res.json({ code: 1, msg: '后端出错了' })
+      return res.json({
+        code: 0,
+        data: { msgs, users }
+      })
+    })
   })
 })
 

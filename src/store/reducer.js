@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import { user } from './user'
 import { chatUser } from './chatUser'
+import chat from './chat'
 
 function counteReducer(state = 0, action) {
   switch (action.type) {
@@ -13,7 +14,7 @@ function counteReducer(state = 0, action) {
   }
 }
 
-export default combineReducers({ counter: counteReducer, user, chatUser })
+export default combineReducers({ counter: counteReducer, user, chatUser, chat })
 
 export function addCount() {
   return { type: 'ADD_COUNT' }

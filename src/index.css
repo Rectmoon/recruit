@@ -38,3 +38,10 @@ code {
 .my-list .spe .am-list-extra {
   flex-basis: initial;
 }
+
+.stick-footer {
+  z-index: 10;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
